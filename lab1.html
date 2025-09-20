@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRCTC - Indian Railway Catering and Tourism Corporation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #e4e6ea;
+      background: #0a0a0a;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(13, 13, 13, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 12px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #b0b3b8;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .login-btn,
+    .register-btn {
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .login-btn {
+      background: transparent;
+      color: #b0b3b8;
+      border: 1px solid #3a3b3c;
+    }
+
+    .register-btn {
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: white;
+      border: none;
+    }
+
+    .login-btn:hover {
+      border-color: #ff6b35;
+      color: #ffffff;
+    }
+
+    .register-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+    }
+
+    /* Main Content */
+    main {
+      padding: 2rem 0;
+    }
+
+    .hero-section {
+      background: rgba(18, 18, 18, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 4rem 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      color: #ffffff;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #b0b3b8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.7;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    /* Booking Section */
+    .booking-section {
+      background: #141414;
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      border: 1px solid #2a2a2a;
+    }
+
+    .booking-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .tab {
+      padding: 1rem 1.5rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      color: #b0b3b8;
+      border-radius: 8px 8px 0 0;
+      transition: all 0.3s ease;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .tab.active {
+      background: #1a1a1a;
+      color: #ff6b35;
+      border-bottom: 2px solid #ff6b35;
+    }
+
+    .booking-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      align-items: end;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #e4e6ea;
+      font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 1rem;
+      border: 1px solid #3a3b3c;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #1a1a1a;
+      color: #e4e6ea;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #ff6b35;
+      box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+    }
+
+    .search-btn {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+    }
+
+    .search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .action-card {
+      background: #141414;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid #2a2a2a;
+    }
+
+    .action-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      border-color: #ff6b35;
+    }
+
+    .action-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .action-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    .action-desc {
+      color: #b0b3b8;
+      font-size: 0.85rem;
+    }
+
+    /* Features Section */
+    .features-section {
+      background: rgba(18, 18, 18, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 3rem;
+      margin: 2rem 0;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .feature-icon {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .feature-text h3 {
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .feature-text p {
+      opacity: 0.7;
+      font-size: 0.9rem;
+      color: #b0b3b8;
+    }
+
+    /* Footer */
+    footer {
+      background: #0d0d0d;
+      color: #b0b3b8;
+      padding: 3rem 0 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .footer-section a {
+      color: #b0b3b8;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .footer-section a:hover {
+      color: #ff6b35;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .booking-form {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-tabs {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* AI Chatbot */
+    .chatbot {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .chatbot:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+    }
+
+    /* Loading Animation */
+    .loading {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #2a2a2a;
+      border-top: 3px solid #ff6b35;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <div class="logo">
+        <div
+          style="width: 40px; height: 40px; background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-right: 12px; font-size: 0.9rem;">
+          IR</div>
+        IRCTC
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#trains">Trains</a></li>
+        <li><a href="#hotels">Hotels</a></li>
+        <li><a href="#tourism">Tourism</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="user-section">
+        <a href="#login" class="login-btn">Login</a>
+        <a href="#register" class="register-btn">Register</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero-section">
+      <h1 class="hero-title">Welcome to IRCTC</h1>
+      <p class="hero-subtitle">Your Gateway to Seamless Railway Travel Experience</p>
+    </section>
+
+    <section class="booking-section">
+      <div class="booking-tabs">
+        <button class="tab active" onclick="switchTab('trains')">🚂 Book Trains</button>
+        <button class="tab" onclick="switchTab('hotels')">🏨 Hotels</button>
+        <button class="tab" onclick="switchTab('tourism')">🎯 Tourism</button>
+        <button class="tab" onclick="switchTab('catering')">🍽️ Catering</button>
+      </div>
+
+      <div id="trains-form" class="booking-form">
+        <div class="form-group">
+          <label for="from">From</label>
+          <input type="text" id="from" placeholder="Enter departure station" list="stations">
+          <datalist id="stations">
+            <option value="New Delhi (NDLS)">
+            <option value="Mumbai Central (BCT)">
+            <option value="Chennai Central (MAS)">
+            <option value="Kolkata (HWH)">
+            <option value="Bangalore (SBC)">
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label for="to">To</label>
+          <input type="text" id="to" placeholder="Enter destination station" list="stations">
+        </div>
+        <div class="form-group">
+          <label for="departure">Departure Date</label>
+          <input type="date" id="departure">
+        </div>
+        <div class="form-group">
+          <label for="class">Class</label>
+          <select id="class">
+            <option>All Classes</option>
+            <option>AC First Class (1A)</option>
+            <option>AC 2 Tier (2A)</option>
+            <option>AC 3 Tier (3A)</option>
+            <option>Sleeper (SL)</option>
+            <option>Second Sitting (2S)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="passengers">Passengers</label>
+          <select id="passengers">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+        </div>
+        <button class="search-btn" onclick="searchTrains()">🔍 Search Trains</button>
+      </div>
+    </section>
+
+    <section class="quick-actions">
+      <div class="action-card" onclick="showPNRStatus()">
+        <div class="action-icon">🎫</div>
+        <h3 class="action-title">PNR Status</h3>
+        <p class="action-desc">Check your ticket confirmation status</p>
+      </div>
+      <div class="action-card" onclick="showTrainSchedule()">
+        <div class="action-icon">📅</div>
+        <h3 class="action-title">Train Schedule</h3>
+        <p class="action-desc">View train timings and schedules</p>
+      </div>
+      <div class="action-card" onclick="showLiveStatus()">
+        <div class="action-icon">📍</div>
+        <h3 class="action-title">Live Train Status</h3>
+        <p class="action-desc">Track your train in real-time</p>
+      </div>
+      <div class="action-card" onclick="showBookingHistory()">
+        <div class="action-icon">📋</div>
+        <h3 class="action-title">Booking History</h3>
+        <p class="action-desc">View your past bookings</p>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <h2 style="text-align: center; margin-bottom: 1rem; font-size: 2.5rem;">Why Choose IRCTC?</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-text">
+            <h3>Lightning Fast Booking</h3>
+            <p>Book tickets in seconds with our optimized booking system</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-text">
+            <h3>Secure Payments</h3>
+            <p>Multiple payment options with bank-grade security</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📱</div>
+          <div class="feature-text">
+            <h3>Mobile Friendly</h3>
+            <p>Responsive design that works on all devices</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🤖</div>
+          <div class="feature-text">
+            <h3>AI Assistant</h3>
+            <p>Get instant help with our DISHA AI chatbot</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-text">
+            <h3>Smart Predictions</h3>
+            <p>Predict confirmation chances for waitlisted tickets</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🌐</div>
+          <div class="feature-text">
+            <h3>Multi-Service Platform</h3>
+            <p>Trains, hotels, tourism packages - all in one place</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="#booking">Book Tickets</a>
+        <a href="#pnr">PNR Status</a>
+        <a href="#schedule">Train Schedule</a>
+        <a href="#refund">Refund</a>
+      </div>
+      <div class="footer-section">
+        <h3>Services</h3>
+        <a href="#hotels">Hotels</a>
+        <a href="#tourism">Tourism</a>
+        <a href="#catering">Catering</a>
+        <a href="#parcel">Parcel Service</a>
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <a href="#help">Help Center</a>
+        <a href="#contact">Contact Us</a>
+        <a href="#faq">FAQ</a>
+        <a href="#feedback">Feedback</a>
+      </div>
+      <div class="footer-section">
+        <h3>About</h3>
+        <a href="#about">About IRCTC</a>
+        <a href="#terms">Terms & Conditions</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#careers">Careers</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AI Chatbot -->
+  <div class="chatbot" onclick="openChatbot()" title="Ask DISHA - AI Assistant">
+    🤖
+  </div>
+
+  <!-- Loading Animation -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <script>
+    // Set minimum date to today
+    document.getElementById('departure').min = new Date().toISOString().split('T')[0];
+
+    // Tab switching functionality
+    function switchTab(tabName) {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Here you would typically show/hide different forms
+      console.log('Switched to:', tabName);
+    }
+
+    // Search trains function
+    function searchTrains() {
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
+      const departure = document.getElementById('departure').value;
+
+      if (!from || !to || !departure) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
+      showLoading();
+
+      // Simulate API call
+      setTimeout(() => {
+        hideLoading();
+        alert(`Searching trains from ${from} to ${to} on ${departure}`);
+        // Here you would redirect to results page
+      }, 2000);
+    }
+
+    // Quick action functions
+    function showPNRStatus() {
+      const pnr = prompt('Enter your 10-digit PNR number:');
+      if (pnr && pnr.length === 10) {
+        showLoading();
+        setTimeout(() => {
+          hideLoading();
+          alert('PNR Status: Confirmed\nTrain: 12345 Rajdhani Express\nSeat: A1/23');
+        }, 1500);
+      }
+    }
+
+    function showTrainSchedule() {
+      const trainNo = prompt('Enter train number:');
+      if (trainNo) {
+        showLoading();
+        setTimeout(() => {
+          hideLoading();
+          alert(`Schedule for Train ${trainNo}:\nDeparture: 10:30 AM\nArrival: 8:45 PM\nDuration: 10h 15m`);
+        }, 1500);
+      }
+    }
+
+    function showLiveStatus() {
+      const trainNo = prompt('Enter train number for live tracking:');
+      if (trainNo) {
+        showLoading();
+        setTimeout(() => {
+          hideLoading();
+          alert(`Live Status for Train ${trainNo}:\nCurrent Location: Approaching Kanpur\nDelay: 15 minutes\nNext Station: Lucknow`);
+        }, 1500);
+      }
+    }
+
+    function showBookingHistory() {
+      alert('Redirecting to booking history...\n(Login required)');
+    }
+
+    // Chatbot function
+    function openChatbot() {
+      alert('DISHA AI Assistant:\n\nHello! I can help you with:\n• Train bookings\n• PNR status\n• Schedule information\n• General queries\n\nHow can I assist you today?');
+    }
+
+    // Loading functions
+    function showLoading() {
+      document.getElementById('loading').style.display = 'block';
+    }
+
+    function hideLoading() {
+      document.getElementById('loading').style.display = 'none';
+    }
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Add interactive animations
+    document.querySelectorAll('.action-card').forEach(card => {
+      card.addEventListener('mouseenter', function () {
+        this.style.transform = 'translateY(-5px) scale(1.02)';
+      });
+
+      card.addEventListener('mouseleave', function () {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Form validation and auto-suggestions
+    const stationInput = document.getElementById('from');
+    const toInput = document.getElementById('to');
+
+    [stationInput, toInput].forEach(input => {
+      input.addEventListener('input', function () {
+        // Add validation styling
+        if (this.value.length > 2) {
+          this.style.borderColor = '#4ECDC4';
+        } else {
+          this.style.borderColor = '#e1e5e9';
+        }
+      });
+    });
+
+    // Welcome animation
+    window.addEventListener('load', function () {
+      const heroSection = document.querySelector('.hero-section');
+      heroSection.style.opacity = '0';
+      heroSection.style.transform = 'translateY(30px)';
+
+      setTimeout(() => {
+        heroSection.style.transition = 'all 1s ease';
+        heroSection.style.opacity = '1';
+        heroSection.style.transform = 'translateY(0)';
+      }, 300);
+    });
+  </script>
+</body>
+
+</html>
