@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Periodic Table</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    .periodic-table {
+      display: grid;
+      grid-template-columns: repeat(18, 50px);
+      grid-template-rows: repeat(10, 50px);
+      gap: 2px;
+      background-color: white;
+      padding: 20px;
+      border: 2px solid #333;
+      margin: 0 auto;
+      width: fit-content;
+    }
+
+    .element {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 10px;
+      font-weight: bold;
+      color: #333;
+      border: 1px solid #666;
+      cursor: pointer;
+    }
+
+    .element:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      position: relative;
+    }
+
+    .symbol {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .number {
+      font-size: 8px;
+    }
+
+    /* Color categories */
+    .alkali {
+      background-color: #FFD700;
+    }
+
+    .alkaline-earth {
+      background-color: #FFA500;
+    }
+
+    .transition {
+      background-color: #90EE90;
+    }
+
+    .post-transition {
+      background-color: #87CEEB;
+    }
+
+    .metalloid {
+      background-color: #DDA0DD;
+    }
+
+    .nonmetal {
+      background-color: #98FB98;
+    }
+
+    .halogen {
+      background-color: #FFB6C1;
+    }
+
+    .noble-gas {
+      background-color: #E6E6FA;
+    }
+
+    .lanthanide {
+      background-color: #FFFF00;
+    }
+
+    .actinide {
+      background-color: #FF6347;
+    }
+
+    /* Specific positioning */
+    .h {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .he {
+      grid-column: 18;
+      grid-row: 1;
+    }
+
+    .li {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .be {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .b {
+      grid-column: 13;
+      grid-row: 2;
+    }
+
+    .c {
+      grid-column: 14;
+      grid-row: 2;
+    }
+
+    .n {
+      grid-column: 15;
+      grid-row: 2;
+    }
+
+    .o {
+      grid-column: 16;
+      grid-row: 2;
+    }
+
+    .f {
+      grid-column: 17;
+      grid-row: 2;
+    }
+
+    .ne {
+      grid-column: 18;
+      grid-row: 2;
+    }
+
+    .na {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    .mg {
+      grid-column: 2;
+      grid-row: 3;
+    }
+
+    .al {
+      grid-column: 13;
+      grid-row: 3;
+    }
+
+    .si {
+      grid-column: 14;
+      grid-row: 3;
+    }
+
+    .p {
+      grid-column: 15;
+      grid-row: 3;
+    }
+
+    .s {
+      grid-column: 16;
+      grid-row: 3;
+    }
+
+    .cl {
+      grid-column: 17;
+      grid-row: 3;
+    }
+
+    .ar {
+      grid-column: 18;
+      grid-row: 3;
+    }
+
+    .k {
+      grid-column: 1;
+      grid-row: 4;
+    }
+
+    .ca {
+      grid-column: 2;
+      grid-row: 4;
+    }
+
+    .sc {
+      grid-column: 3;
+      grid-row: 4;
+    }
+
+    .ti {
+      grid-column: 4;
+      grid-row: 4;
+    }
+
+    .v {
+      grid-column: 5;
+      grid-row: 4;
+    }
+
+    .cr {
+      grid-column: 6;
+      grid-row: 4;
+    }
+
+    .mn {
+      grid-column: 7;
+      grid-row: 4;
+    }
+
+    .fe {
+      grid-column: 8;
+      grid-row: 4;
+    }
+
+    .co {
+      grid-column: 9;
+      grid-row: 4;
+    }
+
+    .ni {
+      grid-column: 10;
+      grid-row: 4;
+    }
+
+    .cu {
+      grid-column: 11;
+      grid-row: 4;
+    }
+
+    .zn {
+      grid-column: 12;
+      grid-row: 4;
+    }
+
+    .ga {
+      grid-column: 13;
+      grid-row: 4;
+    }
+
+    .ge {
+      grid-column: 14;
+      grid-row: 4;
+    }
+
+    .as {
+      grid-column: 15;
+      grid-row: 4;
+    }
+
+    .se {
+      grid-column: 16;
+      grid-row: 4;
+    }
+
+    .br {
+      grid-column: 17;
+      grid-row: 4;
+    }
+
+    .kr {
+      grid-column: 18;
+      grid-row: 4;
+    }
+
+    .rb {
+      grid-column: 1;
+      grid-row: 5;
+    }
+
+    .sr {
+      grid-column: 2;
+      grid-row: 5;
+    }
+
+    .y {
+      grid-column: 3;
+      grid-row: 5;
+    }
+
+    .zr {
+      grid-column: 4;
+      grid-row: 5;
+    }
+
+    .nb {
+      grid-column: 5;
+      grid-row: 5;
+    }
+
+    .mo {
+      grid-column: 6;
+      grid-row: 5;
+    }
+
+    .tc {
+      grid-column: 7;
+      grid-row: 5;
+    }
+
+    .ru {
+      grid-column: 8;
+      grid-row: 5;
+    }
+
+    .rh {
+      grid-column: 9;
+      grid-row: 5;
+    }
+
+    .pd {
+      grid-column: 10;
+      grid-row: 5;
+    }
+
+    .ag {
+      grid-column: 11;
+      grid-row: 5;
+    }
+
+    .cd {
+      grid-column: 12;
+      grid-row: 5;
+    }
+
+    .in {
+      grid-column: 13;
+      grid-row: 5;
+    }
+
+    .sn {
+      grid-column: 14;
+      grid-row: 5;
+    }
+
+    .sb {
+      grid-column: 15;
+      grid-row: 5;
+    }
+
+    .te {
+      grid-column: 16;
+      grid-row: 5;
+    }
+
+    .i {
+      grid-column: 17;
+      grid-row: 5;
+    }
+
+    .xe {
+      grid-column: 18;
+      grid-row: 5;
+    }
+
+    .cs {
+      grid-column: 1;
+      grid-row: 6;
+    }
+
+    .ba {
+      grid-column: 2;
+      grid-row: 6;
+    }
+
+    .la {
+      grid-column: 4;
+      grid-row: 8;
+    }
+
+    .hf {
+      grid-column: 4;
+      grid-row: 6;
+    }
+
+    .ta {
+      grid-column: 5;
+      grid-row: 6;
+    }
+
+    .w {
+      grid-column: 6;
+      grid-row: 6;
+    }
+
+    .re {
+      grid-column: 7;
+      grid-row: 6;
+    }
+
+    .os {
+      grid-column: 8;
+      grid-row: 6;
+    }
+
+    .ir {
+      grid-column: 9;
+      grid-row: 6;
+    }
+
+    .pt {
+      grid-column: 10;
+      grid-row: 6;
+    }
+
+    .au {
+      grid-column: 11;
+      grid-row: 6;
+    }
+
+    .hg {
+      grid-column: 12;
+      grid-row: 6;
+    }
+
+    .tl {
+      grid-column: 13;
+      grid-row: 6;
+    }
+
+    .pb {
+      grid-column: 14;
+      grid-row: 6;
+    }
+
+    .bi {
+      grid-column: 15;
+      grid-row: 6;
+    }
+
+    .po {
+      grid-column: 16;
+      grid-row: 6;
+    }
+
+    .at {
+      grid-column: 17;
+      grid-row: 6;
+    }
+
+    .rn {
+      grid-column: 18;
+      grid-row: 6;
+    }
+
+    .fr {
+      grid-column: 1;
+      grid-row: 7;
+    }
+
+    .ra {
+      grid-column: 2;
+      grid-row: 7;
+    }
+
+    .ac {
+      grid-column: 4;
+      grid-row: 9;
+    }
+
+    .rf {
+      grid-column: 4;
+      grid-row: 7;
+    }
+
+    .db {
+      grid-column: 5;
+      grid-row: 7;
+    }
+
+    .sg {
+      grid-column: 6;
+      grid-row: 7;
+    }
+
+    .bh {
+      grid-column: 7;
+      grid-row: 7;
+    }
+
+    .hs {
+      grid-column: 8;
+      grid-row: 7;
+    }
+
+    .mt {
+      grid-column: 9;
+      grid-row: 7;
+    }
+
+    .ds {
+      grid-column: 10;
+      grid-row: 7;
+    }
+
+    .rg {
+      grid-column: 11;
+      grid-row: 7;
+    }
+
+    .cn {
+      grid-column: 12;
+      grid-row: 7;
+    }
+
+    .nh {
+      grid-column: 13;
+      grid-row: 7;
+    }
+
+    .fl {
+      grid-column: 14;
+      grid-row: 7;
+    }
+
+    .mc {
+      grid-column: 15;
+      grid-row: 7;
+    }
+
+    .lv {
+      grid-column: 16;
+      grid-row: 7;
+    }
+
+    .ts {
+      grid-column: 17;
+      grid-row: 7;
+    }
+
+    .og {
+      grid-column: 18;
+      grid-row: 7;
+    }
+
+    /* Lanthanides */
+    .ce {
+      grid-column: 5;
+      grid-row: 8;
+    }
+
+    .pr {
+      grid-column: 6;
+      grid-row: 8;
+    }
+
+    .nd {
+      grid-column: 7;
+      grid-row: 8;
+    }
+
+    .pm {
+      grid-column: 8;
+      grid-row: 8;
+    }
+
+    .sm {
+      grid-column: 9;
+      grid-row: 8;
+    }
+
+    .eu {
+      grid-column: 10;
+      grid-row: 8;
+    }
+
+    .gd {
+      grid-column: 11;
+      grid-row: 8;
+    }
+
+    .tb {
+      grid-column: 12;
+      grid-row: 8;
+    }
+
+    .dy {
+      grid-column: 13;
+      grid-row: 8;
+    }
+
+    .ho {
+      grid-column: 14;
+      grid-row: 8;
+    }
+
+    .er {
+      grid-column: 15;
+      grid-row: 8;
+    }
+
+    .tm {
+      grid-column: 16;
+      grid-row: 8;
+    }
+
+    .yb {
+      grid-column: 17;
+      grid-row: 8;
+    }
+
+    .lu {
+      grid-column: 18;
+      grid-row: 8;
+    }
+
+    /* Actinides */
+    .th {
+      grid-column: 5;
+      grid-row: 9;
+    }
+
+    .pa {
+      grid-column: 6;
+      grid-row: 9;
+    }
+
+    .u {
+      grid-column: 7;
+      grid-row: 9;
+    }
+
+    .np {
+      grid-column: 8;
+      grid-row: 9;
+    }
+
+    .pu {
+      grid-column: 9;
+      grid-row: 9;
+    }
+
+    .am {
+      grid-column: 10;
+      grid-row: 9;
+    }
+
+    .cm {
+      grid-column: 11;
+      grid-row: 9;
+    }
+
+    .bk {
+      grid-column: 12;
+      grid-row: 9;
+    }
+
+    .cf {
+      grid-column: 13;
+      grid-row: 9;
+    }
+
+    .es {
+      grid-column: 14;
+      grid-row: 9;
+    }
+
+    .fm {
+      grid-column: 15;
+      grid-row: 9;
+    }
+
+    .md {
+      grid-column: 16;
+      grid-row: 9;
+    }
+
+    .no {
+      grid-column: 17;
+      grid-row: 9;
+    }
+
+    .lr {
+      grid-column: 18;
+      grid-row: 9;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="periodic-table">
+    <!-- Period 1 -->
+    <div class="element nonmetal h">
+      <div class="number">1</div>
+      <div class="symbol">H</div>
+    </div>
+    <div class="element noble-gas he">
+      <div class="number">2</div>
+      <div class="symbol">He</div>
+    </div>
+
+    <!-- Period 2 -->
+    <div class="element alkali li">
+      <div class="number">3</div>
+      <div class="symbol">Li</div>
+    </div>
+    <div class="element alkaline-earth be">
+      <div class="number">4</div>
+      <div class="symbol">Be</div>
+    </div>
+    <div class="element metalloid b">
+      <div class="number">5</div>
+      <div class="symbol">B</div>
+    </div>
+    <div class="element nonmetal c">
+      <div class="number">6</div>
+      <div class="symbol">C</div>
+    </div>
+    <div class="element nonmetal n">
+      <div class="number">7</div>
+      <div class="symbol">N</div>
+    </div>
+    <div class="element nonmetal o">
+      <div class="number">8</div>
+      <div class="symbol">O</div>
+    </div>
+    <div class="element halogen f">
+      <div class="number">9</div>
+      <div class="symbol">F</div>
+    </div>
+    <div class="element noble-gas ne">
+      <div class="number">10</div>
+      <div class="symbol">Ne</div>
+    </div>
+
+    <!-- Period 3 -->
+    <div class="element alkali na">
+      <div class="number">11</div>
+      <div class="symbol">Na</div>
+    </div>
+    <div class="element alkaline-earth mg">
+      <div class="number">12</div>
+      <div class="symbol">Mg</div>
+    </div>
+    <div class="element post-transition al">
+      <div class="number">13</div>
+      <div class="symbol">Al</div>
+    </div>
+    <div class="element metalloid si">
+      <div class="number">14</div>
+      <div class="symbol">Si</div>
+    </div>
+    <div class="element nonmetal p">
+      <div class="number">15</div>
+      <div class="symbol">P</div>
+    </div>
+    <div class="element nonmetal s">
+      <div class="number">16</div>
+      <div class="symbol">S</div>
+    </div>
+    <div class="element halogen cl">
+      <div class="number">17</div>
+      <div class="symbol">Cl</div>
+    </div>
+    <div class="element noble-gas ar">
+      <div class="number">18</div>
+      <div class="symbol">Ar</div>
+    </div>
+
+    <!-- Period 4 -->
+    <div class="element alkali k">
+      <div class="number">19</div>
+      <div class="symbol">K</div>
+    </div>
+    <div class="element alkaline-earth ca">
+      <div class="number">20</div>
+      <div class="symbol">Ca</div>
+    </div>
+    <div class="element transition sc">
+      <div class="number">21</div>
+      <div class="symbol">Sc</div>
+    </div>
+    <div class="element transition ti">
+      <div class="number">22</div>
+      <div class="symbol">Ti</div>
+    </div>
+    <div class="element transition v">
+      <div class="number">23</div>
+      <div class="symbol">V</div>
+    </div>
+    <div class="element transition cr">
+      <div class="number">24</div>
+      <div class="symbol">Cr</div>
+    </div>
+    <div class="element transition mn">
+      <div class="number">25</div>
+      <div class="symbol">Mn</div>
+    </div>
+    <div class="element transition fe">
+      <div class="number">26</div>
+      <div class="symbol">Fe</div>
+    </div>
+    <div class="element transition co">
+      <div class="number">27</div>
+      <div class="symbol">Co</div>
+    </div>
+    <div class="element transition ni">
+      <div class="number">28</div>
+      <div class="symbol">Ni</div>
+    </div>
+    <div class="element transition cu">
+      <div class="number">29</div>
+      <div class="symbol">Cu</div>
+    </div>
+    <div class="element transition zn">
+      <div class="number">30</div>
+      <div class="symbol">Zn</div>
+    </div>
+    <div class="element post-transition ga">
+      <div class="number">31</div>
+      <div class="symbol">Ga</div>
+    </div>
+    <div class="element metalloid ge">
+      <div class="number">32</div>
+      <div class="symbol">Ge</div>
+    </div>
+    <div class="element metalloid as">
+      <div class="number">33</div>
+      <div class="symbol">As</div>
+    </div>
+    <div class="element nonmetal se">
+      <div class="number">34</div>
+      <div class="symbol">Se</div>
+    </div>
+    <div class="element halogen br">
+      <div class="number">35</div>
+      <div class="symbol">Br</div>
+    </div>
+    <div class="element noble-gas kr">
+      <div class="number">36</div>
+      <div class="symbol">Kr</div>
+    </div>
+
+    <!-- Period 5 -->
+    <div class="element alkali rb">
+      <div class="number">37</div>
+      <div class="symbol">Rb</div>
+    </div>
+    <div class="element alkaline-earth sr">
+      <div class="number">38</div>
+      <div class="symbol">Sr</div>
+    </div>
+    <div class="element transition y">
+      <div class="number">39</div>
+      <div class="symbol">Y</div>
+    </div>
+    <div class="element transition zr">
+      <div class="number">40</div>
+      <div class="symbol">Zr</div>
+    </div>
+    <div class="element transition nb">
+      <div class="number">41</div>
+      <div class="symbol">Nb</div>
+    </div>
+    <div class="element transition mo">
+      <div class="number">42</div>
+      <div class="symbol">Mo</div>
+    </div>
+    <div class="element transition tc">
+      <div class="number">43</div>
+      <div class="symbol">Tc</div>
+    </div>
+    <div class="element transition ru">
+      <div class="number">44</div>
+      <div class="symbol">Ru</div>
+    </div>
+    <div class="element transition rh">
+      <div class="number">45</div>
+      <div class="symbol">Rh</div>
+    </div>
+    <div class="element transition pd">
+      <div class="number">46</div>
+      <div class="symbol">Pd</div>
+    </div>
+    <div class="element transition ag">
+      <div class="number">47</div>
+      <div class="symbol">Ag</div>
+    </div>
+    <div class="element transition cd">
+      <div class="number">48</div>
+      <div class="symbol">Cd</div>
+    </div>
+    <div class="element post-transition in">
+      <div class="number">49</div>
+      <div class="symbol">In</div>
+    </div>
+    <div class="element post-transition sn">
+      <div class="number">50</div>
+      <div class="symbol">Sn</div>
+    </div>
+    <div class="element metalloid sb">
+      <div class="number">51</div>
+      <div class="symbol">Sb</div>
+    </div>
+    <div class="element metalloid te">
+      <div class="number">52</div>
+      <div class="symbol">Te</div>
+    </div>
+    <div class="element halogen i">
+      <div class="number">53</div>
+      <div class="symbol">I</div>
+    </div>
+    <div class="element noble-gas xe">
+      <div class="number">54</div>
+      <div class="symbol">Xe</div>
+    </div>
+
+    <!-- Period 6 -->
+    <div class="element alkali cs">
+      <div class="number">55</div>
+      <div class="symbol">Cs</div>
+    </div>
+    <div class="element alkaline-earth ba">
+      <div class="number">56</div>
+      <div class="symbol">Ba</div>
+    </div>
+    <div class="element transition hf">
+      <div class="number">72</div>
+      <div class="symbol">Hf</div>
+    </div>
+    <div class="element transition ta">
+      <div class="number">73</div>
+      <div class="symbol">Ta</div>
+    </div>
+    <div class="element transition w">
+      <div class="number">74</div>
+      <div class="symbol">W</div>
+    </div>
+    <div class="element transition re">
+      <div class="number">75</div>
+      <div class="symbol">Re</div>
+    </div>
+    <div class="element transition os">
+      <div class="number">76</div>
+      <div class="symbol">Os</div>
+    </div>
+    <div class="element transition ir">
+      <div class="number">77</div>
+      <div class="symbol">Ir</div>
+    </div>
+    <div class="element transition pt">
+      <div class="number">78</div>
+      <div class="symbol">Pt</div>
+    </div>
+    <div class="element transition au">
+      <div class="number">79</div>
+      <div class="symbol">Au</div>
+    </div>
+    <div class="element transition hg">
+      <div class="number">80</div>
+      <div class="symbol">Hg</div>
+    </div>
+    <div class="element post-transition tl">
+      <div class="number">81</div>
+      <div class="symbol">Tl</div>
+    </div>
+    <div class="element post-transition pb">
+      <div class="number">82</div>
+      <div class="symbol">Pb</div>
+    </div>
+    <div class="element post-transition bi">
+      <div class="number">83</div>
+      <div class="symbol">Bi</div>
+    </div>
+    <div class="element metalloid po">
+      <div class="number">84</div>
+      <div class="symbol">Po</div>
+    </div>
+    <div class="element halogen at">
+      <div class="number">85</div>
+      <div class="symbol">At</div>
+    </div>
+    <div class="element noble-gas rn">
+      <div class="number">86</div>
+      <div class="symbol">Rn</div>
+    </div>
+
+    <!-- Period 7 -->
+    <div class="element alkali fr">
+      <div class="number">87</div>
+      <div class="symbol">Fr</div>
+    </div>
+    <div class="element alkaline-earth ra">
+      <div class="number">88</div>
+      <div class="symbol">Ra</div>
+    </div>
+    <div class="element transition rf">
+      <div class="number">104</div>
+      <div class="symbol">Rf</div>
+    </div>
+    <div class="element transition db">
+      <div class="number">105</div>
+      <div class="symbol">Db</div>
+    </div>
+    <div class="element transition sg">
+      <div class="number">106</div>
+      <div class="symbol">Sg</div>
+    </div>
+    <div class="element transition bh">
+      <div class="number">107</div>
+      <div class="symbol">Bh</div>
+    </div>
+    <div class="element transition hs">
+      <div class="number">108</div>
+      <div class="symbol">Hs</div>
+    </div>
+    <div class="element transition mt">
+      <div class="number">109</div>
+      <div class="symbol">Mt</div>
+    </div>
+    <div class="element transition ds">
+      <div class="number">110</div>
+      <div class="symbol">Ds</div>
+    </div>
+    <div class="element transition rg">
+      <div class="number">111</div>
+      <div class="symbol">Rg</div>
+    </div>
+    <div class="element transition cn">
+      <div class="number">112</div>
+      <div class="symbol">Cn</div>
+    </div>
+    <div class="element post-transition nh">
+      <div class="number">113</div>
+      <div class="symbol">Nh</div>
+    </div>
+    <div class="element post-transition fl">
+      <div class="number">114</div>
+      <div class="symbol">Fl</div>
+    </div>
+    <div class="element post-transition mc">
+      <div class="number">115</div>
+      <div class="symbol">Mc</div>
+    </div>
+    <div class="element post-transition lv">
+      <div class="number">116</div>
+      <div class="symbol">Lv</div>
+    </div>
+    <div class="element halogen ts">
+      <div class="number">117</div>
+      <div class="symbol">Ts</div>
+    </div>
+    <div class="element noble-gas og">
+      <div class="number">118</div>
+      <div class="symbol">Og</div>
+    </div>
+
+    <!-- Lanthanides -->
+    <div class="element lanthanide la">
+      <div class="number">57</div>
+      <div class="symbol">La</div>
+    </div>
+    <div class="element lanthanide ce">
+      <div class="number">58</div>
+      <div class="symbol">Ce</div>
+    </div>
+    <div class="element lanthanide pr">
+      <div class="number">59</div>
+      <div class="symbol">Pr</div>
+    </div>
+    <div class="element lanthanide nd">
+      <div class="number">60</div>
+      <div class="symbol">Nd</div>
+    </div>
+    <div class="element lanthanide pm">
+      <div class="number">61</div>
+      <div class="symbol">Pm</div>
+    </div>
+    <div class="element lanthanide sm">
+      <div class="number">62</div>
+      <div class="symbol">Sm</div>
+    </div>
+    <div class="element lanthanide eu">
+      <div class="number">63</div>
+      <div class="symbol">Eu</div>
+    </div>
+    <div class="element lanthanide gd">
+      <div class="number">64</div>
+      <div class="symbol">Gd</div>
+    </div>
+    <div class="element lanthanide tb">
+      <div class="number">65</div>
+      <div class="symbol">Tb</div>
+    </div>
+    <div class="element lanthanide dy">
+      <div class="number">66</div>
+      <div class="symbol">Dy</div>
+    </div>
+    <div class="element lanthanide ho">
+      <div class="number">67</div>
+      <div class="symbol">Ho</div>
+    </div>
+    <div class="element lanthanide er">
+      <div class="number">68</div>
+      <div class="symbol">Er</div>
+    </div>
+    <div class="element lanthanide tm">
+      <div class="number">69</div>
+      <div class="symbol">Tm</div>
+    </div>
+    <div class="element lanthanide yb">
+      <div class="number">70</div>
+      <div class="symbol">Yb</div>
+    </div>
+    <div class="element lanthanide lu">
+      <div class="number">71</div>
+      <div class="symbol">Lu</div>
+    </div>
+
+    <!-- Actinides -->
+    <div class="element actinide ac">
+      <div class="number">89</div>
+      <div class="symbol">Ac</div>
+    </div>
+    <div class="element actinide th">
+      <div class="number">90</div>
+      <div class="symbol">Th</div>
+    </div>
+    <div class="element actinide pa">
+      <div class="number">91</div>
+      <div class="symbol">Pa</div>
+    </div>
+    <div class="element actinide u">
+      <div class="number">92</div>
+      <div class="symbol">U</div>
+    </div>
+    <div class="element actinide np">
+      <div class="number">93</div>
+      <div class="symbol">Np</div>
+    </div>
+    <div class="element actinide pu">
+      <div class="number">94</div>
+      <div class="symbol">Pu</div>
+    </div>
+    <div class="element actinide am">
+      <div class="number">95</div>
+      <div class="symbol">Am</div>
+    </div>
+    <div class="element actinide cm">
+      <div class="number">96</div>
+      <div class="symbol">Cm</div>
+    </div>
+    <div class="element actinide bk">
+      <div class="number">97</div>
+      <div class="symbol">Bk</div>
+    </div>
+    <div class="element actinide cf">
+      <div class="number">98</div>
+      <div class="symbol">Cf</div>
+    </div>
+    <div class="element actinide es">
+      <div class="number">99</div>
+      <div class="symbol">Es</div>
+    </div>
+    <div class="element actinide fm">
+      <div class="number">100</div>
+      <div class="symbol">Fm</div>
+    </div>
+    <div class="element actinide md">
+      <div class="number">101</div>
+      <div class="symbol">Md</div>
+    </div>
+    <div class="element actinide no">
+      <div class="number">102</div>
+      <div class="symbol">No</div>
+    </div>
+    <div class="element actinide lr">
+      <div class="number">103</div>
+      <div class="symbol">Lr</div>
+    </div>
+  </div>
+</body>
+
+</html>
