@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive English Alphabet Chart</title>
+  </head>
+  <body>
+    <h1>Interactive English Alphabet Chart</h1>
+    <p>Click on any letter to see an example image in a new page!</p>
+
+    <!-- Alphabet Chart with Image Map -->
+    <img
+      src="./alpabet.jpg"
+      alt="Alphabet Chart"
+      usemap="#alphabetMap"
+      width="400"
+      height="600"
+      style="border: 2px solid #333; display: block; margin: 0 auto"
+      onload="loadChartImage()"
+    />
+
+    <map name="alphabetMap">
+      <area
+        shape="rect"
+        coords="10,45,90,125"
+        href="#"
+        onclick="showExample('A'); return false;"
+        alt="Letter A"
+      />
+      <area
+        shape="rect"
+        coords="90,45,170,125"
+        href="#"
+        onclick="showExample('B'); return false;"
+        alt="Letter B"
+      />
+      <area
+        shape="rect"
+        coords="170,45,250,125"
+        href="#"
+        onclick="showExample('C'); return false;"
+        alt="Letter C"
+      />
+      <area
+        shape="rect"
+        coords="250,45,330,125"
+        href="#"
+        onclick="showExample('D'); return false;"
+        alt="Letter D"
+      />
+      <area
+        shape="rect"
+        coords="330,45,410,125"
+        href="#"
+        onclick="showExample('E'); return false;"
+        alt="Letter E"
+      />
+
+      <!-- Row 2: F, G, H, I, J -->
+      <area
+        shape="rect"
+        coords="10,125,90,205"
+        href="#"
+        onclick="showExample('F'); return false;"
+        alt="Letter F"
+      />
+      <area
+        shape="rect"
+        coords="90,125,170,205"
+        href="#"
+        onclick="showExample('G'); return false;"
+        alt="Letter G"
+      />
+      <area
+        shape="rect"
+        coords="170,125,250,205"
+        href="#"
+        onclick="showExample('H'); return false;"
+        alt="Letter H"
+      />
+      <area
+        shape="rect"
+        coords="250,125,330,205"
+        href="#"
+        onclick="showExample('I'); return false;"
+        alt="Letter I"
+      />
+      <area
+        shape="rect"
+        coords="330,125,410,205"
+        href="#"
+        onclick="showExample('J'); return false;"
+        alt="Letter J"
+      />
+
+      <!-- Row 3: K, L, M, N, O -->
+      <area
+        shape="rect"
+        coords="10,205,90,285"
+        href="#"
+        onclick="showExample('K'); return false;"
+        alt="Letter K"
+      />
+      <area
+        shape="rect"
+        coords="90,205,170,285"
+        href="#"
+        onclick="showExample('L'); return false;"
+        alt="Letter L"
+      />
+      <area
+        shape="rect"
+        coords="170,205,250,285"
+        href="#"
+        onclick="showExample('M'); return false;"
+        alt="Letter M"
+      />
+      <area
+        shape="rect"
+        coords="250,205,330,285"
+        href="#"
+        onclick="showExample('N'); return false;"
+        alt="Letter N"
+      />
+      <area
+        shape="rect"
+        coords="330,205,410,285"
+        href="#"
+        onclick="showExample('O'); return false;"
+        alt="Letter O"
+      />
+
+      <!-- Row 4: P, Q, R, S, T -->
+      <area
+        shape="rect"
+        coords="10,285,90,365"
+        href="#"
+        onclick="showExample('P'); return false;"
+        alt="Letter P"
+      />
+      <area
+        shape="rect"
+        coords="90,285,170,365"
+        href="#"
+        onclick="showExample('Q'); return false;"
+        alt="Letter Q"
+      />
+      <area
+        shape="rect"
+        coords="170,285,250,365"
+        href="#"
+        onclick="showExample('R'); return false;"
+        alt="Letter R"
+      />
+      <area
+        shape="rect"
+        coords="250,285,330,365"
+        href="#"
+        onclick="showExample('S'); return false;"
+        alt="Letter S"
+      />
+      <area
+        shape="rect"
+        coords="330,285,410,365"
+        href="#"
+        onclick="showExample('T'); return false;"
+        alt="Letter T"
+      />
+
+      <!-- Row 5: U, V, W, X, Y -->
+      <area
+        shape="rect"
+        coords="10,365,90,445"
+        href="#"
+        onclick="showExample('U'); return false;"
+        alt="Letter U"
+      />
+      <area
+        shape="rect"
+        coords="90,365,170,445"
+        href="#"
+        onclick="showExample('V'); return false;"
+        alt="Letter V"
+      />
+      <area
+        shape="rect"
+        coords="170,365,250,445"
+        href="#"
+        onclick="showExample('W'); return false;"
+        alt="Letter W"
+      />
+      <area
+        shape="rect"
+        coords="250,365,330,445"
+        href="#"
+        onclick="showExample('X'); return false;"
+        alt="Letter X"
+      />
+      <area
+        shape="rect"
+        coords="330,365,410,445"
+        href="#"
+        onclick="showExample('Y'); return false;"
+        alt="Letter Y"
+      />
+
+      <!-- Row 6: Z -->
+      <area
+        shape="rect"
+        coords="10,445,90,525"
+        href="#"
+        onclick="showExample('Z'); return false;"
+        alt="Letter Z"
+      />
+    </map>
+
+    <script>
+      // Object containing image examples for each letter
+      const examples = {
+        A: "🍎",
+        B: "⚽",
+        C: "🐱",
+        D: "🐶",
+        E: "🐘",
+        F: "🐟",
+        G: "🦒",
+        H: "🏠",
+        I: "🍦",
+        J: "🦘",
+        K: "🪁",
+        L: "🦁",
+        M: "🌙",
+        N: "🪺",
+        O: "🍊",
+        P: "🐧",
+        Q: "👸",
+        R: "🐰",
+        S: "☀️",
+        T: "🌳",
+        U: "☂️",
+        V: "🎻",
+        W: "🐋",
+        X: "🎵",
+        Y: "💛",
+        Z: "🦓",
+      };
+
+      // Function to load the chart image
+      function loadChartImage() {
+        // Try to load the user's uploaded image
+        const img = document.querySelector('img[usemap="#alphabetMap"]');
+        if (window.fs && typeof window.fs.readFile === "function") {
+          // If file system is available, try to read the uploaded image
+          window.fs
+            .readFile("alphabet_chart.jpg")
+            .then((data) => {
+              const blob = new Blob([data], { type: "image/jpeg" });
+              const url = URL.createObjectURL(blob);
+              img.src = url;
+            })
+            .catch(() => {
+              // If file not found, create a simple text-based chart
+              createTextChart();
+            });
+        } else {
+          createTextChart();
+        }
+      }
+
+      function createTextChart() {
+        const img = document.querySelector('img[usemap="#alphabetMap"]');
+        // Create a canvas to draw the alphabet chart
+        const canvas = document.createElement("canvas");
+        canvas.width = 400;
+        canvas.height = 600;
+        const ctx = canvas.getContext("2d");
+
+        // Draw background
+        ctx.fillStyle = "#4169E1";
+        ctx.fillRect(0, 0, 400, 600);
+
+        // Draw title
+        ctx.fillStyle = "white";
+        ctx.font = "bold 24px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("Alphabet Chart", 200, 30);
+
+        // Draw letters in grid
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        ctx.font = "bold 32px Arial";
+        ctx.textAlign = "center";
+
+        let index = 0;
+        for (let row = 0; row < 6; row++) {
+          for (let col = 0; col < 5; col++) {
+            if (index < letters.length) {
+              const x = col * 80 + 50;
+              const y = row * 80 + 85;
+
+              // Draw letter background
+              ctx.fillStyle = "white";
+              ctx.fillRect(x - 35, y - 35, 70, 70);
+
+              // Draw letter
+              ctx.fillStyle = "#4169E1";
+              ctx.fillText(letters[index], x, y + 10);
+
+              index++;
+            }
+          }
+        }
+
+        img.src = canvas.toDataURL();
+      }
+
+      function showExample(letter) {
+        const image = examples[letter];
+        const newWindow = window.open("", "_blank", "width=400,height=400");
+        newWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Letter ${letter}</title>
+                </head>
+                <body style="margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100vh; background-color:#f0f8ff;">
+                    <div style="font-size:200px; text-align:center;">${image}</div>
+                </body>
+                </html>
+            `);
+        newWindow.document.close();
+      }
+    </script>
+  </body>
+</html>
